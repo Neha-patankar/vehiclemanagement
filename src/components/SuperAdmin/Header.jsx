@@ -41,7 +41,7 @@ export default function Header() {
             <img
               src={userSession.profile_picture}
               alt="Profile"
-              className="h-16 w-16 rounded-full object-cover bg-white p-1 shadow-md"
+              className="h-16 w-16 rounded-lg object-cover bg-white p-1 shadow-md"
             />
           ) : (
             <div className="h-16 w-16 rounded-full bg-white flex items-center justify-center shadow-md">
@@ -54,11 +54,11 @@ export default function Header() {
           )}
 
           <div className="text-black">
-            <h2 className="text-lg md:text-xl font-bold">
-              {userSession.company_name || "Company Name"}
-            </h2>
-            <p className="text-sm md:text-base opacity-90">
-              {userSession.client_name || "Client Name"}
+            {/* <h2 className="text-lg md:text-xl font-bold">
+             Company Name : {userSession.company_name || "Company Name"}
+            </h2> */}
+            <p className="text-md md:text-xl font-bold">
+             Client Name : {userSession.client_name || "Client Name"}
             </p>
 
             {userSession.client_type && (
@@ -70,23 +70,28 @@ export default function Header() {
         </div>
 
         {/* RIGHT SIDE BUTTONS */}
-        <div className="flex gap-3">
+        <div className="flex gap-1">
           <button
             onClick={handleGoBack}
-            className="bg-white rounded-full p-2 hover:bg-orange-100 transition-all shadow-md"
+            className="  "
           >
-            <img src={homeIcon} className="h-10 w-10" />
+            <img src={homeIcon} className="h-16 w-16" />
           </button>
 
           <button
             onClick={handleLogout}
-            className="bg-white rounded-full p-2 hover:bg-red-100 transition-all shadow-md"
+            className="  "
           >
-            <img src={logoutIcon} className="h-10 w-10" />
+            <img src={logoutIcon} className="h-16 w-16" />
           </button>
         </div>
 
       </div>
+      <h1 className="text-center text-xl md:text-2xl font-bold p-2 text-white bg-orange-600">
+          <p className="text-lg md:text-xl font-bold">
+             Company Name : {userSession.company_name || "Company Name"}
+            </p>
+      </h1>
     </div>
   );
 }

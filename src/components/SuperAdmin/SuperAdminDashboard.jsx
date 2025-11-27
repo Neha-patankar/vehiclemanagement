@@ -306,18 +306,17 @@ export default function SuperAdminDashboard() {
       <Header/>
 
       {/* HEADING */}
-      <h1 className="text-center text-xl md:text-2xl font-bold p-2 text-white bg-orange-600">
+      {/* <h1 className="text-center text-xl md:text-2xl font-bold p-2 text-white bg-orange-600">
         Antony Waste Handling Cell Pvt Ltd
-      </h1>
+      </h1> */}
 
       {/* ICON BUTTONS GRID (1-14) */}
-      <div className="grid grid-cols-3 md:grid-cols-9 gap-2 p-2">
+      <div className="grid grid-cols-3 md:grid-cols-9 gap-0 p-0">
         {iconButtons.map((btn) => (
           <button
             key={btn.id}
             onClick={() => navigate(btn.path)}
-            className="rounded-xl flex flex-col items-center justify-center shadow 
-              hover:scale-105 transition-all duration-200 bg-transparent"
+            className=""
           >
             <img src={btn.icon} alt={btn.label} />
           </button>
@@ -325,14 +324,14 @@ export default function SuperAdminDashboard() {
       </div>
 
       {/* BLUE BUTTONS SECTION (15-19) - Separate Div */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4 p-4 mt-4">
+      <div className="grid grid-cols-2 md:grid-cols-6 gap-2 p-4 mt-1">
         {blueButtons.map((btn) => (
           <button
             key={btn.id}
             onClick={() => navigate(btn.path)}
-            className="bg-blue-600 text-white rounded-xl shadow-lg 
+            className="bg-gradient-to-r from-blue-950  via-blue-700 to-blue-950 text-white rounded-xl shadow-lg 
               hover:bg-blue-700 hover:scale-105 transition-all duration-200
-              h-24 flex items-center justify-center px-4"
+              h-20 flex items-center justify-center px-4"
           >
             <span className="text-sm md:text-base font-medium text-center">
               {btn.label}

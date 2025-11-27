@@ -34,9 +34,9 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen bg-white">
       <Header/>
-      <h1 className="text-center text-xl font-bold p-2 text-white bg-gradient-to-t from-orange-600 via-orange-600 to-orange-600">
+      {/* <h1 className="text-center text-xl font-bold p-2 text-white bg-gradient-to-t from-orange-600 via-orange-600 to-orange-600">
          Admin Dashboard
-      </h1>
+      </h1> */}
 
       <div className="grid grid-cols-3 md:grid-cols-7 gap-1 p-2">
         {buttons.map((btn) => (

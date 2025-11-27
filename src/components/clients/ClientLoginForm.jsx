@@ -436,18 +436,17 @@ export default function ClientLoginForm() {
         // *************** MAIN FIX HERE ***************
         const client = data.client;
 
-       const userSession = {
-  client_name: client.client_name || "",
-  company_name: client.company_name || "",
-  profile_picture: client.profile_picture
-    ? `http://localhost:5000/uploads/clients/${client.profile_picture}`
-    : "",
-  client_unique_id: client.client_unique_id || "",
-  company_id: client.company_id || "",
-  client_type: client.client_type || "",   // 🔥 important
-  client_mobile: mobile,                   // 🔥 always store entered mobile
-};
-
+        const userSession = {
+          client_name: client.client_name || "",
+          company_name: client.company_name || "",
+          profile_picture: client.profile_picture
+            ? `http://localhost:5000/uploads/clients/${client.profile_picture}`
+            : "",
+          client_unique_id: client.client_unique_id || "",
+          company_id: client.company_id || "",
+          client_type: client.client_type || "", // 🔥 important
+          client_mobile: mobile, // 🔥 always store entered mobile
+        };
 
         sessionStorage.setItem("userSession", JSON.stringify(userSession));
         // *********************************************
@@ -478,10 +477,12 @@ export default function ClientLoginForm() {
 
   return (
     // <div className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900">
-      <div
-  className="min-h-screen flex items-center justify-center relative overflow-hidden bg-cover bg-center"
-  style={{ backgroundImage: "url('/src/assets/login/IMG-20251122-WA0006.jpg')" }}
->
+    <div
+      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-cover bg-center"
+      style={{
+        backgroundImage: "url('/src/assets/login/IMG-20251122-WA0006.jpg')",
+      }}
+    >
       {/* Animated Gradient Orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute w-96 h-96 -top-48 -left-48 bg-purple-500/20 rounded-full blur-3xl animate-pulse"></div>
@@ -500,12 +501,10 @@ export default function ClientLoginForm() {
         {/* Left Side - Branding */}
         <div className="hidden lg:block text-white space-y-6">
           <div className="space-y-4">
-            <h1 className="text-5xl font-bold leading-tight">
+            <h1 className="text-3xl font-bold leading-tight">
               Welcome to
               <br />
-              <span className="bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent">
-                Fleet Management System
-              </span>
+              <span className="text-yellow-300 ">Fleet Management System</span>
             </h1>
             <p className="text-xl text-white/90 leading-relaxed font-semibold">
               Manage your Vehicle Transactions with ease of Mobile
@@ -541,173 +540,187 @@ export default function ClientLoginForm() {
 
         {/* Right Side - Login Form */}
         <div className="w-full max-w-md mx-auto lg:mx-0">
-        <div
-  className="backdrop-blur-2xl bg-white/10 rounded-3xl shadow-2xl border border-white/20 overflow-hidden"
-  style={{
-    backgroundImage: "url('src/assets/login/IMG-20251121-WA0040.jpg')",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  }}
->
-  <div className="p-8 bg-black/40 backdrop-blur-xl">
-    {/* Header */}
-    <div className="text-center mb-8">
-      
-      {/* Logo Center Top */}
-      <img
-        src="src/assets/login/aanshi_logo.png"
-        alt="Logo"
-        className="mx-auto w-32 mb-4"
-      />
-
-      <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-2xl mb-4 shadow-lg mx-auto">
-        <Lock className="w-10 h-10 text-white" />
-      </div>
-
-      <h2 className="text-4xl font-bold text-white mb-2">Sign In</h2>
-      <p className="text-white/70 text-sm">Enter your credentials to continue</p>
-    </div>
-
-    {/* Form */}
-    <div className="space-y-5">
-      {!otpSent ? (
-        <>
-          {/* Mobile Input */}
-          <div className="space-y-2">
-            <label className="text-white font-semibold text-sm block pl-1">
-              Mobile Number
-            </label>
-            <div className="relative">
-              <div className="absolute left-4 top-1/2 -translate-y-1/2 z-10">
-                <Phone className="w-5 h-5 text-white/70" />
-              </div>
-              <input
-                type="tel"
-                placeholder="Enter 10-digit number"
-                value={mobile}
-                onChange={(e) =>
-                  setMobile(e.target.value.replace(/\D/g, "").slice(0, 10))
-                }
-                onKeyPress={(e) => handleKeyPress(e, handleSendOtp)}
-                maxLength="10"
-                className="w-full pl-12 pr-4 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-yellow-400/50 focus:bg-white/15 transition-all duration-300 text-lg"
-              />
-            </div>
-          </div>
-
-          {/* Send OTP Button */}
-          <button
-            onClick={handleSendOtp}
-            disabled={loading}
-            className="w-full py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-blue-900 rounded-xl font-bold text-lg flex items-center justify-center gap-2 hover:from-yellow-500 hover:to-yellow-600 transition-all duration-300 shadow-lg hover:shadow-yellow-500/50 transform hover:scale-[1.02] mt-6 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {loading ? (
-              <div className="w-5 h-5 border-2 border-blue-900/30 border-t-blue-900 rounded-full animate-spin"></div>
-            ) : (
-              <>
-                Send OTP
-                <ArrowRight className="w-5 h-5" />
-              </>
-            )}
-          </button>
-        </>
-      ) : (
-        <>
-          {/* OTP Sent Section */}
-          <div className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 backdrop-blur-sm border border-green-300/30 rounded-xl p-4">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-green-500/30 rounded-full flex items-center justify-center flex-shrink-0">
-                <Check className="w-6 h-6 text-green-300" />
-              </div>
-              <div>
-                <p className="text-white font-bold text-lg">OTP Sent!</p>
-                <p className="text-white/70 text-sm">Code sent to +91 {mobile}</p>
-              </div>
-            </div>
-          </div>
-
-          {/* OTP Input */}
-          <div className="space-y-2">
-            <label className="text-white/80 text-sm font-medium block pl-1">
-              Enter OTP
-            </label>
-            <div className="relative">
-              <div className="absolute left-4 top-1/2 -translate-y-1/2 z-10">
-                <Lock className="w-5 h-5 text-purple-300" />
-              </div>
-              <input
-                type="text"
-                placeholder="6-digit code"
-                value={otp}
-                onChange={(e) =>
-                  setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))
-                }
-                onKeyPress={(e) => handleKeyPress(e, handleVerifyOtp)}
-                maxLength="6"
-                className="w-full pl-12 pr-4 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-purple-400/50 focus:bg-white/15 transition-all duration-300 tracking-widest text-center text-2xl font-semibold"
-              />
-            </div>
-          </div>
-
-          {/* Verify Button */}
-          <button
-            onClick={handleVerifyOtp}
-            disabled={loading}
-            className="w-full py-4 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-xl font-semibold flex items-center justify-center gap-2 hover:from-purple-600 hover:to-blue-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-purple-500/50 transform hover:scale-[1.02] mt-6"
-          >
-            {loading ? (
-              <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-            ) : (
-              <>
-                Verify & Login
-                <ArrowRight className="w-5 h-5" />
-              </>
-            )}
-          </button>
-
-          {/* Back Button */}
-          <button
-            onClick={() => {
-              setOtpSent(false);
-              setOtp("");
-              setMessage("");
+          <div
+            className="backdrop-blur-2xl bg-white/10 rounded-3xl shadow-2xl border border-white/20 overflow-hidden"
+            style={{
+              backgroundImage:
+                "url('src/assets/login/IMG-20251121-WA0040.jpg')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
-            className="w-full py-3 text-white/70 hover:text-white text-sm transition-colors font-medium"
           >
-            ← Change mobile number
-          </button>
-        </>
-      )}
-    </div>
+            <div className="p-4 bg-white/40 backdrop-blur-xl">
+              {/* Header */}
+              <div className="text-center mb-8">
+                {/* Logo Center Top */}
+                <img
+                  src="src/assets/login/aanshi_logo.png"
+                  alt="Logo"
+                  className="mx-auto w-32 mb-4"
+                />
 
-    {/* Message */}
-    {message && (
-      <div
-        className={`mt-5 p-4 rounded-xl backdrop-blur-sm border ${
-          message.includes("success") || message.includes("sent")
-            ? "bg-green-500/20 border-green-300/30 text-green-100"
-            : "bg-red-500/20 border-red-300/30 text-red-100"
-        } text-sm text-center font-medium`}
-      >
-        {message}
-      </div>
-    )}
+                <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-2xl mb-4 shadow-lg mx-auto">
+                  <Lock className="w-10 h-10 text-white" />
+                </div>
 
-    {/* Footer */}
-    <div className="mt-8 text-center">
-      <p>
-        Register here:{" "}
-        <a href="/admin/inquiry-from" className="text-blue-400 underline">
-          Register here
-        </a>
-      </p>
-      <p className="text-white/60 text-xs mt-1">
-        Powered by Aanshi Solutions • Terms & Privacy Policy
-      </p>
-    </div>
-  </div>
-</div>
+                <h2 className="text-4xl font-bold text-white mb-2">Sign In</h2>
+                <p className="text-white/70 text-sm">
+                  Enter your credentials to continue
+                </p>
+              </div>
 
+              {/* Form */}
+              <div className="space-y-5 bg-white/50 p-4 rounded-lg">
+                {!otpSent ? (
+                  <>
+                    {/* Mobile Input */}
+                    <div className="space-y-2 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black rounded-lg">
+                      <label className="text-black font-bold text-lg block py-2 text-center">
+                        Mobile Number
+                      </label>
+
+                      <div className="relative flex justify-center">
+                        <div className="absolute left-4 top-1/2 -translate-y-1/2 z-10">
+                          <Phone className="w-5 h-5 text-yellow-600" />
+                        </div>
+
+                        <input
+                          type="tel"
+                          placeholder="Enter 10-digit number"
+                          value={mobile}
+                          onChange={(e) =>
+                            setMobile(
+                              e.target.value.replace(/\D/g, "").slice(0, 10)
+                            )
+                          }
+                          onKeyPress={(e) => handleKeyPress(e, handleSendOtp)}
+                          maxLength="10"
+                          className="w-full pl-12 pr-4 py-4 bg-white text-black border-2 border-yellow-500 rounded-xl placeholder-gray-500 focus:outline-none focus:border-yellow-700 transition-all duration-300 text-lg"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Send OTP Button */}
+                    <button
+                      onClick={handleSendOtp}
+                      disabled={loading}
+                      className="w-full py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-blue-900 rounded-xl font-bold text-lg flex items-center justify-center gap-2 hover:from-yellow-500 hover:to-yellow-600 transition-all duration-300 shadow-lg hover:shadow-yellow-500/50 transform hover:scale-[1.02] mt-6 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {loading ? (
+                        <div className="w-5 h-5 border-2 border-blue-900/30 border-t-blue-900 rounded-full animate-spin"></div>
+                      ) : (
+                        <>
+                          <span className="text-black bold">Send OTP</span>
+                          <ArrowRight className="w-5 h-5 text-black font-bold" />
+                        </>
+                      )}
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    {/* OTP Sent Section */}
+                    <div className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 backdrop-blur-sm border border-green-300/30 rounded-xl p-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 bg-green-500/30 rounded-full flex items-center justify-center flex-shrink-0">
+                          <Check className="w-6 h-6 text-green-300" />
+                        </div>
+                        <div>
+                          <p className="text-white font-bold text-lg">
+                            OTP Sent!
+                          </p>
+                          <p className="text-white/70 text-sm">
+                            Code sent to +91 {mobile}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* OTP Input */}
+                    <div className="space-y-2">
+                      <label className="text-white/80 text-sm font-medium block pl-1">
+                        Enter OTP
+                      </label>
+                      <div className="relative">
+                        <div className="absolute left-4 top-1/2 -translate-y-1/2 z-10">
+                          <Lock className="w-5 h-5 text-purple-300" />
+                        </div>
+                        <input
+                          type="text"
+                          placeholder="6-digit code"
+                          value={otp}
+                          onChange={(e) =>
+                            setOtp(
+                              e.target.value.replace(/\D/g, "").slice(0, 6)
+                            )
+                          }
+                          onKeyPress={(e) => handleKeyPress(e, handleVerifyOtp)}
+                          maxLength="6"
+                          className="w-full pl-12 pr-4 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/20 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-purple-400/50 focus:bg-white/15 transition-all duration-300 tracking-widest text-center text-2xl font-semibold"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Verify Button */}
+                    <button
+                      onClick={handleVerifyOtp}
+                      disabled={loading}
+                      className="w-full py-4 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-xl font-semibold flex items-center justify-center gap-2 hover:from-purple-600 hover:to-blue-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-purple-500/50 transform hover:scale-[1.02] mt-6"
+                    >
+                      {loading ? (
+                        <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                      ) : (
+                        <>
+                          Verify & Login
+                          <ArrowRight className="w-5 h-5" />
+                        </>
+                      )}
+                    </button>
+
+                    {/* Back Button */}
+                    <button
+                      onClick={() => {
+                        setOtpSent(false);
+                        setOtp("");
+                        setMessage("");
+                      }}
+                      className="w-full py-3 text-white/70 hover:text-white text-sm transition-colors font-medium"
+                    >
+                      ← Change mobile number
+                    </button>
+                  </>
+                )}
+              </div>
+
+              {/* Message */}
+              {message && (
+                <div
+                  className={`mt-5 p-4 rounded-xl backdrop-blur-sm border ${
+                    message.includes("success") || message.includes("sent")
+                      ? "bg-green-500/20 border-green-300/30 text-green-100"
+                      : "bg-red-500/20 border-red-300/30 text-red-100"
+                  } text-sm text-center font-medium`}
+                >
+                  {message}
+                </div>
+              )}
+
+              {/* Footer */}
+              <div className="mt-2 text-center text-white font-bold">
+                <p>
+                  Register here:{" "}
+                  <a
+                    href="/admin/inquiry-from"
+                    className="text-blue-500 underline"
+                  >
+                    Register here
+                  </a>
+                </p>
+                <p className="text-black text-mg mt-1">
+                  Powered by Aanshi Solutions • Terms & Privacy Policy
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
