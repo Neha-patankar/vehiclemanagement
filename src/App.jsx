@@ -11,7 +11,7 @@ import { Tyre } from "./components/SuperAdminPages/Tyre";
 import { Fuel } from "./components/SuperAdminPages/Fuel";
 import { Expenses } from "./components/SuperAdminPages/Expenses";
 import { Maintenance } from "./components/SuperAdminPages/Maintenance";
-import { Finance } from "./components/SuperAdminPages/finance";
+import { Finance } from "./components/SuperAdminPages/Finance";
 import { Tripsheet } from "./components/SuperAdminPages/Tripsheet";
 import { VehicleHiring } from "./components/SuperAdminPages/VehicleHiring";
 import { VehicleOnbording } from "./components/SuperAdminPages/VehicleOnbording";
